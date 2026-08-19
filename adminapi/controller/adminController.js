@@ -2332,7 +2332,7 @@ const getTabularUser = async (request,response) => {
     if(!to_date) {
       return response.status(200).json({status:true,msg : languageMessages.msg_empty_param,key : "to_date"})
     }
-    var sqlSelect = `SELECT user_id, login_type, user_type, f_name, name, l_name, username, dob, age, phone_code, mobile, otp, otp_verify, email, password, image, latitude, longitude, zipcode, active_flag, gender, notification_status, instagram_id, createtime, updatetime 
+    var sqlSelect = `SELECT user_id, f_name, address, admission_type, name,mobile, createtime, updatetime 
     FROM user_master  WHERE delete_flag = 0  AND Date(createtime) BETWEEN ? AND ?  ORDER BY user_id DESC`;
 
     connection.query(sqlSelect, [from_date, to_date], (err, result) => {
@@ -2376,20 +2376,17 @@ const getTabularUser = async (request,response) => {
 
             name: data.name,
 
-            email: data.email,
+            address: data.address,
 
-            image: data.image,
-
-            latitude: data.latitude,
-
-            longitude: data.longitude,
+            admission_type: data.admission_type,
 
             mobile: data.mobile,
 
-            active_flag: data.active_flag,
+           
 
-            active_flag_lable: (data.active_flag === 1) ? "active" : "deactive",
+            mobile: data.mobile,
 
+         
             createtime: moment(data.createtime).format("DD-MM-YYYY HH:mm A"),
           });
         }
@@ -2755,6 +2752,9 @@ const getUserAnalyticalReports = async (req, res) => {
     }
 
 };
+
+
+
 function getUserAnalyticalReportsData(
   type,
   current_year,
@@ -2787,6 +2787,8 @@ function getUserAnalyticalReportsData(
   });
 }
 
+
+
 //===================== end getUserAnalyticalReports=============================//
 
 
@@ -2794,7 +2796,7 @@ function getUserAnalyticalReportsData(
 
 const fetchUsers = async (request, response) => {
   var fetch =
-    "SELECT user_id, f_name,l_name FROM user_master WHERE delete_flag = 0 AND user_type != 0 AND otp_verify = 1";
+    "SELECT user_id, name, mobile FROM user_master WHERE delete_flag = 0 ";
 
   connection.query(fetch, async (err, res) => {
     if (err) {
@@ -3000,12 +3002,12 @@ const sendBroadcastMessage = async (req, res) => {
 
         if (userType === 'user') {
 
-            query = 'SELECT  `user_id`, `user_type`, `username`, `image`, `mobile`,  `createtime`  FROM `user_master` WHERE  delete_flag = 0 and active_flag !=0 and user_type =1  order by user_id desc';
+            query = 'SELECT  `user_id`, `user_type`, `username`, `image`, `mobile`,  `createtime`  FROM `user_master` WHERE  delete_flag = 0 order by user_id desc';
 
         } else {
 
             query =
-              "SELECT  `user_id`, `user_type`, `username`, `image`, `mobile`,  `createtime`  FROM `user_master` WHERE  delete_flag = 0 and active_flag !=0 and user_type !=0  order by user_id desc";
+              "SELECT  `user_id`, `user_type`, `username`, `image`, `mobile`,  `createtime`  FROM `user_master` WHERE  delete_flag = 0 order by user_id desc";
 
         }
 
@@ -3076,7 +3078,7 @@ const sendBroadcastMessage = async (req, res) => {
     };
     async function getNotificationStatus(user_id) {
       return new Promise((resolve, reject) => {
-        const sql = "SELECT user_id FROM user_master WHERE user_id = ? AND notification_status = '1'";
+        const sql = "SELECT user_id FROM user_master WHERE user_id = ?";
         
         connection.query(sql, [user_id], (error, results) => {
           if (error) {

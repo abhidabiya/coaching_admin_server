@@ -13,7 +13,13 @@ const bodyParser = require('body-parser');
 // Static folder serve
 // Your logo folder path: F:\Promax Parkom\Parkom_Server\logo
 app.use('/logo', express.static(path.join(__dirname, 'logo')));
-app.use('/images', express.static(path.join(__dirname, 'images')));    
+app.use('/images', express.static(path.join(__dirname, 'images')));   
+
+app.use(
+  "/coaching_admin_server/images",
+  express.static(path.join(__dirname, "images"))
+);
+
 const PORT = 3003;
 
 // Middleware to parse JSON bodies

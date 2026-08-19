@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
 
     password : "",
 
-    database : 'parkom_db'
+    database : 'coaching_db'
 
 
 });
