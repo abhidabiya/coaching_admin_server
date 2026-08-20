@@ -98,8 +98,8 @@ const adminLoginapi = require("../controller/adminLogin");
 const CourseController = require("../controller/CourseController");
 const studentController = require("../controller/studentController");
 
-const fecultyExpenceController = require("../controller/fecultyController.js")
-
+const fecultyExpenceController = require("../controller/fecultyController.js");
+const tackManageController = require("../controller/taskController.js");
 
 var route = express.Router();
 
@@ -184,6 +184,42 @@ route.get('/course_list', studentController.getCoursesList);
 route.put('/update_followup/:id', studentController.updateFollowup);
 
 
+
+
+
+// ------------------------------------------------Task Manage API'S-----------------------------------
+
+
+// 1. Add Note - POST /add_note
+route.post("/add_note", upload.none(), tackManageController.addNote);
+
+// 2. Get All Notes - GET /get_all_notes
+route.get("/get_all_notes", tackManageController.getAllNotes);
+
+// 3. Get Single Note - GET /get_note/:id
+route.get("/get_note/:id", tackManageController.getNoteById);
+
+// 4. Update Note - PUT /update_note/:id
+route.put("/update_note/:id", upload.none(), tackManageController.updateNote);
+
+// 5. Delete Note - DELETE /delete_note/:id
+route.delete("/delete_note/:id", tackManageController.deleteNote);
+
+// 6. Get Notes by Category - GET /get_notes_by_category/:category
+route.get("/get_notes_by_category/:category", tackManageController.getNotesByCategory);
+
+// 7. Get Notes by Date Range - GET /get_notes_by_date_range
+route.get("/get_notes_by_date_range", tackManageController.getNotesByDateRange);
+
+// 8. Get Recent Notes - GET /get_recent_notes
+route.get("/get_recent_notes", tackManageController.getRecentNotes);
+
+
+// 9. Get Notes Summary - GET /get_notes_summary
+route.get("/get_notes_summary", tackManageController.getNotesSummary);
+
+// 10. Get Category Stats - GET /get_category_stats
+route.get("/get_category_stats", tackManageController.getCategoryStats);
 
 
 
