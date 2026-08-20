@@ -109,6 +109,7 @@ var route = express.Router();
 
 //######################## --- Admin Code --- #########################
 
+route.get("/get_admin_data",getAdminAllData);
 
 route.post("/admin_login",upload.none(), adminLoginapi.adminLoginController);
 
@@ -467,7 +468,6 @@ route.get("/get_all_guard",getAllGuardData);
 
 route.post("/society_admin_login",upload.none(),SocietyadminLogin);
 
-route.get("/get_admin_data",getAdminAllData);
 
 route.get("/get_user_total_count",getUserTotalCount);
 

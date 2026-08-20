@@ -1450,9 +1450,9 @@ const DeleteUser = async (request, response) => {
 
   const { user_id } = data;
 
-  console.log(data);
+  // console.log(data);
 
-  console.log(user_id);
+  // console.log(user_id);
 
   if (!user_id) {
     return response
@@ -2082,7 +2082,7 @@ const updateStatus = async (request, response) => {
       .json({ success: false, msg: languageMessages.msg_empty_param });
   }
 
-  console.log(contact_id);
+  // console.log(contact_id);
 
   try {
     var check =
@@ -2414,7 +2414,7 @@ const getTabularUser = async (request,response) => {
 const getAdminAllData = async (request,response) => {
   try {
     const sqlCheckUser =
-    "SELECT user_id,email,username, password, user_id, active_flag, user_type,image FROM user_master WHERE delete_flag = 0 AND user_type = 0";
+    "SELECT user_id,email,username,name, password, user_id, active_flag, user_type, image FROM user_master WHERE delete_flag = 0 AND user_type = 0";
 
   connection.query(sqlCheckUser,  async (err, userResult) => {
     if (err) {
@@ -2484,7 +2484,7 @@ const UpdateAdminPassword = async (request, response) => {
         });
       }
 
-      console.log(info[0].user_id);
+      // console.log(info[0].user_id);
 
       var sqlforget = "select password from user_master where user_id = ?";
 
@@ -2502,7 +2502,7 @@ const UpdateAdminPassword = async (request, response) => {
 
           var password = data[0].password;
 
-          console.log(password);
+          // console.log(password);
 
           const old_password_hash = await hashPassword(oldpassword);
 
@@ -2744,7 +2744,7 @@ const getUserAnalyticalReports = async (req, res) => {
             return res.json(record);
 
         } catch (error) {
-            console.log("database error key 2:", error);
+            // console.log("database error key 2:", error);
             const record = { success: false, msg: languageMessages.internalServerError, key: error };
             return res.json(record);
         }
@@ -2761,7 +2761,7 @@ function getUserAnalyticalReportsData(
   current_month,
   get_by_type 
 ) {
-  console.log("current_month:", current_month);
+  // console.log("current_month:", current_month);
 
   return new Promise((resolve, reject) => {
     let whereClause = "";
@@ -2948,12 +2948,12 @@ const sendBroadcastMessage = async (req, res) => {
             if (notstatus && notstatus.success) {
               successArr.push({ user_id, status: "success" });
             } else {
-              console.log(`Failed to send notification to user ${user_id}`);
+              // console.log(`Failed to send notification to user ${user_id}`);
               failedArr.push({ user_id, status: "failed" });
             }
           }
         } else {
-          console.log(`Notification array check failed for user ${user_id}`);
+          // console.log(`Notification array check failed for user ${user_id}`);
           failedArr.push({ user_id, status: "failed" });
         }
       } catch (error) {
@@ -3021,7 +3021,7 @@ const sendBroadcastMessage = async (req, res) => {
 
                 if (error) {
 
-                    console.log('database user get all error ')
+                    // console.log('database user get all error ')
 
                     reject(error); // Reject the promise with the error
 
@@ -4111,7 +4111,7 @@ current_year,
 current_month,
 get_by_type
 ) {
-console.log("current_month:", current_month);
+// console.log("current_month:", current_month);
 
 return new Promise((resolve, reject) => {
   let whereClause = "";
@@ -4287,7 +4287,7 @@ current_year,
 current_month,
 get_by_type
 ) {
-console.log("current_month:", current_month);
+// console.log("current_month:", current_month);
 
 return new Promise((resolve, reject) => {
   let whereClause = "";
@@ -6530,7 +6530,7 @@ current_year,
 current_month,
 get_by_type
 ) {
-console.log("current_month:", current_month);
+// console.log("current_month:", current_month);
 
 return new Promise((resolve, reject) => {
   let whereClause = "";

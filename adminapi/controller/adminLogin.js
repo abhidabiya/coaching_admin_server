@@ -496,8 +496,8 @@ const UpdateAdminProfile = async (request, response) => {
         return response.status(200).json({ success: false, msg: languageMessages.msg_empty_param });
       }
   
-      let updateQuery = "UPDATE user_master SET username = ?, email = ?";
-      let params = [name, email];
+      let updateQuery = "UPDATE user_master SET username = ?, name = ?, f_name = ?, email = ?";
+      let params = [name, name, name, email];
   
       if (image) {
         updateQuery += ", image = ?";
